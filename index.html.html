@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tic Tac Toe</title>
+</head>
+<style type="text/css">
+	body {
+		font-size: 20px;
+		font-family: "Raleway"
+	}
+	#tab {
+		width: 450px;
+		height: 450px;
+	}
+
+	#tab td {
+		width: 150px;
+		height: 150px;
+		text-align: center;
+		font-size: 75px;
+	}
+
+	#winner {
+		width: 7%;
+		height: 7%;
+		background-color: green;
+		position: fixed;
+		border-radius: 50%;
+		text-align: center;
+		margin-left: 100px;
+	}
+</style>
+<body>
+	<div>
+		<center>
+			<table border="1">
+			<tr>
+				<td>Player 1</td>
+				<td>Player 2</td>
+			</tr>
+			<tr>
+				<td><input type="text" disabled="" id="p1"></td>
+				<td><input type="text" disabled="" id="p2"></td>
+			</tr>
+			<tr>
+				<td align="center">X</td>
+				<td align="center">O</td>
+			</tr>
+			<tr>
+				<td id="score1" align="center">0</td>
+				<td id="score2" align="center">0</td>
+			</tr>
+		</table>
+		<button onclick="reg(event)">Register</button>
+		</center>
+	</div>
+	<div id="winner"></div>
+	<center>
+		<table border="1" id="tab">
+		<tr>
+			<td id="box1" onclick="game(event)"></td><td id="box2" onclick="game(event)"></td><td id="box3" onclick="game(event)"></td>
+		</tr>
+		<tr>
+			<td id="box4" onclick="game(event)"></td><td id="box5" onclick="game(event)"></td><td id="box6" onclick="game(event)"></td>
+		</tr>
+		<tr>
+			<td id="box7" onclick="game(event)"></td><td id="box8" onclick="game(event)"></td><td id="box9" onclick="game(event)"></td>
+		</tr>
+	</table>
+	</center>
+	<div id="scores" style="background-color: red; text-align: center;">&nbsp;</div>
+	<button onclick="restart()" id="res">Restart Game</button>
+
+	<script type="text/javascript">
+		var k = tab.innerHTML;
+	tab.style.display = "none"
+	res.style.display = "none"
+	winner.style.display = "none"
+		function reg(ev) {
+			if (ev.target.innerHTML == "Register") {
+				p1.disabled = false;
+				p2.disabled = false;
+				p1.value = "";
+				p2.value = "";
+				score1.innerHTML = 0;
+				score2.innerHTML = 0;
+				m = 0;
+				scores.innerHTML = scores.innerHTML = p1.value + " " + score1.innerHTML + " : " +score2.innerHTML + " " + p2.value;
+				tab.style.display = "none";
+				restart()
+				ev.target.innerHTML = "Start Game";
+			}
+			else {
+				p1.disabled = true;
+				p2.disabled = true;
+				scores.innerHTML = p1.value + " " + score1.innerHTML + " : " +score2.innerHTML + " " + p2.value;
+				tab.style.display = "block"
+				ev.target.innerHTML = "Register";
+			}
+		}
+var m = 0
+		function game(e) {
+			res.style.display = "block";
+			
+			if (e.target.innerHTML == "" && m == 0) {
+				e.target.innerHTML = "X"
+				m = 1
+			} 	else if (e.target.innerHTML == "" && m == 1) {
+					e.target.innerHTML = "O"
+					m = 0
+				}
+	
+				if (box1.innerHTML !="" && box2.innerHTML != "" && box3.innerHTML != "" && box1.innerHTML == box2.innerHTML && box2.innerHTML == box3.innerHTML) {
+				win(box1.innerHTML)
+				} else if (box2.innerHTML != "" &&  box5.innerHTML != "" && box8.innerHTML != ""  && box2.innerHTML == box5.innerHTML && box5.innerHTML == box8.innerHTML) {
+			win(box2.innerHTML)
+		}else if (box3.innerHTML != "" &&  box6.innerHTML != "" && box9.innerHTML != ""  && box3.innerHTML == box6.innerHTML && box6.innerHTML == box9.innerHTML) {
+			win(box3.innerHTML)
+		}else if (box4.innerHTML != "" &&  box5.innerHTML != "" && box6.innerHTML != ""  && box4.innerHTML == box5.innerHTML && box5.innerHTML == box6.innerHTML) {
+			win(box4.innerHTML)
+		}else if (box1.innerHTML != "" &&  box4.innerHTML != "" && box7.innerHTML != ""  && box1.innerHTML == box4.innerHTML && box4.innerHTML == box7.innerHTML) {
+			win(box1.innerHTML)
+		}else if (box7.innerHTML != "" &&  box8.innerHTML != "" && box9.innerHTML != ""  && box7.innerHTML == box8.innerHTML && box8.innerHTML == box9.innerHTML) {
+			win(box7.innerHTML)
+		}else if (box1.innerHTML != "" &&  box5.innerHTML != "" && box9.innerHTML != ""  && box1.innerHTML == box5.innerHTML && box5.innerHTML == box9.innerHTML) {
+			win(box1.innerHTML)
+		}else if (box3.innerHTML != "" &&  box5.innerHTML != "" && box7.innerHTML != ""  && box3.innerHTML == box5.innerHTML && box5.innerHTML == box7.innerHTML) {
+			win(box5.innerHTML)
+		}else if(box1.innerHTML !="" && box2.innerHTML !="" && box3.innerHTML !="" && box4.innerHTML !="" && box5.innerHTML !="" && box6.innerHTML !="" && box7.innerHTML !="" && box8.innerHTML !="" && box9.innerHTML !=""){
+			winner.style.display = "block"
+			winner.style.backgroundColor = "red"
+			winner.innerHTML = "Draw"
+			restart()
+		}
+		}
+		function restart() {
+			setTimeout(function() {
+				winner.style.display = "none";
+			}, 3000)
+			tab.innerHTML = k;
+		}
+		
+		function win(peep) {
+		    winner.style.display = "block";
+				// winner.innerHTML = peep + " wins";
+				winner.style.backgroundColor = "green";
+				if (peep == "X") {
+					winner.innerHTML = p1.value + " wins"
+					score1.innerHTML ++;
+				}
+				else if (peep == "O") {
+					winner.innerHTML = p2.value + " wins"
+					score2.innerHTML ++;
+				}
+				scores.innerHTML = p1.value + " " + score1.innerHTML + " : " +score2.innerHTML + " " + p2.value;
+				restart()
+		}
+	</script>
+</body>
+</html>
